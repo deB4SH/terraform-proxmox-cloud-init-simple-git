@@ -84,14 +84,14 @@ variable "user_password" {
   type        = string
   sensitive   = true
   description = "Default user password to set"
-  #echo -n password | sha256sum | awk '{printf "%s",$1 }' | sha256sum
-  default = "113459eb7bb31bddee85ade5230d6ad5d8b2fb52879e00a84ff6ae1067a210d3"
+  #to generate a user_password run the following command and replace password with your password
+  #> echo -n password | sha256sum | awk '{printf "%s",$1 }' | sha256sum
 }
 
 variable "user_pub_key" {
   type        = string
   sensitive   = true
   description = "Public key to use for authentication."
-  #ssh-keygen -t ed25519 -C "<EMAIL>"
-  default = ""
+  #to generate a new pubkey run following command
+  #> ssh-keygen -t ed25519 -C "<EMAIL>"
 }
