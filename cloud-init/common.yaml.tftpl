@@ -31,7 +31,7 @@ packages:
   - git
   - cgit
 mounts:
-  - [ "//${vm_data_mount_address}/${vm_data_mount_share}", "/mnt/data", "cifs", "defaults,uid=1000,username=${vm_data_mount_username},password=${vm_data_mount_password}" ]
+  - [ "//${vm_data_mount_address}/${vm_data_mount_share}", "/mnt/data", "cifs", "defaults,vers=3.0,uid=1000,username=${vm_data_mount_username},password=${vm_data_mount_password}" ]
 runcmd:
   - systemctl enable qemu-guest-agent
   - systemctl start qemu-guest-agent
