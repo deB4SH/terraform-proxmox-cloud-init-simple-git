@@ -38,11 +38,11 @@ mounts:
   - [ "${vm_data_mount_address}:/${vm_data_mount_share}", "/mnt/data", "nfs4", "" ]
 runcmd:
   - systemctl enable qemu-guest-agent
-  - systemctl start qemu-guest-agent
   - a2enconf cgit
   - a2enmod cgid
   - systemctl restart apache2
   - tmux new-session -d -s "git-daemon" /var/git-daemon.sh
+  - systemctl start qemu-guest-agent
 final_message: |
   cloud-init done
   Version: $version
