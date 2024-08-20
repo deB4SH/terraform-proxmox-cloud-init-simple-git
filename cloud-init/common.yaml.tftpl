@@ -26,20 +26,23 @@ write_files:
       source-filter=/usr/lib/cgit/filters/syntax-highlighting.py
       # specify repository folder
       scan-path=/mnt/data
+  - path: /var/git-daemon.sh
+    content: |
+      git daemon --verbose --base-path=/mnt/data --enable=receive-pack
 packages:
   - qemu-guest-agent
   - git
   - cgit
-  - cifs-utils
+  - tmux
 mounts:
-  - [ "//${vm_data_mount_address}/${vm_data_mount_share}", "/mnt/data", "cifs", "defaults,vers=3.0,uid=1000,username=${vm_data_mount_username},password=${vm_data_mount_password}" ]
+  - [ "${vm_data_mount_address}:/${vm_data_mount_share}", "/mnt/data", "nfs4", "" ]
 runcmd:
   - systemctl enable qemu-guest-agent
   - systemctl start qemu-guest-agent
   - a2enconf cgit
   - a2enmod cgid
   - systemctl restart apache2
-  - nohup git daemon --verbose --base-path=/mnt/data --enable=receive-pack &
+  - tmux new-session -d -s "git-daemon" /var/git-daemon.sh
 final_message: |
   cloud-init done
   Version: $version
