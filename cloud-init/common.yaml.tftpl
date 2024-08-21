@@ -29,16 +29,24 @@ write_files:
   - path: /var/git-daemon.sh
     content: |
       git daemon --verbose --base-path=/mnt/data --enable=receive-pack
+  - path: /etc/auto.nfs
+    content: |
+      public -fstype=nfs,rw,retry=0 ${vm_data_mount_address}:${vm_data_mount_share}
+  - path: /etc/auto.master
+    content: |
+      /mnt/data /etc/auto.nfs
+    append: true
 packages:
   - qemu-guest-agent
   - git
   - cgit
   - nfs-common
   - tmux
-mounts:
-  - [ "${vm_data_mount_address}:/${vm_data_mount_share}", "/mnt/data", "nfs4", "" ]
+  - autofs
 runcmd:
   - systemctl enable qemu-guest-agent
+  - systemctl enable autofs
+  - systemctl restart autofs
   - a2enconf cgit
   - a2enmod cgid
   - systemctl restart apache2
