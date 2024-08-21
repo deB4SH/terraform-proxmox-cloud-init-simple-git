@@ -29,13 +29,14 @@ write_files:
   - path: /var/git-daemon.sh
     content: |
       git daemon --verbose --base-path=/mnt/data --enable=receive-pack
-  - path: /etc/auto.nfs
-    content: |
-      data -fstype=nfs,rw,nfsvers=3,nolock,retry=0 ${vm_data_mount_address}:${vm_data_mount_share}
-  - path: /etc/auto.master
-    content: |
-      /mnt /etc/auto.nfs
+  - path: /etc/auto.misc
     append: true
+    content: |
+      /mnt/data    -fstype=nfs4,rw,nolock         ${vm_data_mount_address}:${vm_data_mount_share}
+  - path: /etc/auto.master
+    append: true
+    content: |
+      /-   /etc/auto.misc
 packages:
   - qemu-guest-agent
   - git
