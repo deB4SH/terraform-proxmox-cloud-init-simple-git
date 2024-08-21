@@ -33,6 +33,7 @@ packages:
   - qemu-guest-agent
   - git
   - cgit
+  - nfs-common
   - tmux
 mounts:
   - [ "${vm_data_mount_address}:/${vm_data_mount_share}", "/mnt/data", "nfs4", "" ]
