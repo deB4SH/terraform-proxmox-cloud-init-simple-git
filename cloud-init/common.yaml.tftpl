@@ -36,7 +36,7 @@ write_files:
   - path: /etc/auto.misc
     append: true
     content: |
-      /mnt/data    -fstype=cifs,uid=1000,username=${vm_data_mount_username},password=${vm_data_mount_password}         ://${vm_data_mount_address}/${vm_data_mount_share}
+      /mnt/data    -fstype=cifs,vers=3.0,uid=1000,username=${vm_data_mount_username},password=${vm_data_mount_password}         ://${vm_data_mount_address}/${vm_data_mount_share}
   - path: /etc/auto.master
     append: true
     content: |
