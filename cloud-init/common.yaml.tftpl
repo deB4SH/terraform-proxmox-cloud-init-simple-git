@@ -11,10 +11,6 @@ users:
     sudo: ALL=(ALL) NOPASSWD:ALL
 hostname: ${hostname}
 timezone: Europe/Berlin
-apt:
-  primary:
-    - arches: [amd64, arm64, i386, default]
-      uri: https://debian.inf.tu-dresden.de/debian
 write_files:
   - path: /etc/cgitrc
     content: |
@@ -36,7 +32,7 @@ write_files:
   - path: /etc/auto.misc
     append: true
     content: |
-      /mnt/data    -fstype=nfs4,rw,nolock    ${vm_data_mount_address}:${vm_data_mount_share}
+      /mnt/data    -fstype=nfs4,rw,nolock         ${vm_data_mount_address}:${vm_data_mount_share}
   - path: /etc/auto.master
     append: true
     content: |
