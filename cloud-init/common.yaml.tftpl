@@ -51,6 +51,7 @@ runcmd:
   - a2enconf cgit
   - a2enmod cgid
   - systemctl restart apache2
+  - chmod +x /var/git-daemon.sh
   - tmux new-session -d -s "git-daemon" /var/git-daemon.sh
   - systemctl start qemu-guest-agent
 final_message: |
