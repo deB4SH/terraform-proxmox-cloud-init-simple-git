@@ -31,10 +31,10 @@ write_files:
       git daemon --verbose --base-path=/mnt/data --enable=receive-pack
   - path: /etc/auto.nfs
     content: |
-      public -fstype=nfs,rw,nfsvers=3,nolock,retry=0 ${vm_data_mount_address}:${vm_data_mount_share}
+      data -fstype=nfs,rw,nfsvers=3,nolock,retry=0 ${vm_data_mount_address}:${vm_data_mount_share}
   - path: /etc/auto.master
     content: |
-      /mnt/data /etc/auto.nfs
+      /mnt /etc/auto.nfs
     append: true
 packages:
   - qemu-guest-agent
